@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,700&display=swap');
+
+:root{
+   --primary-color: rgb(27, 139, 161);
+   --primary-color-ligth: rgb(110, 199, 216);
+}
+*{
+    box-sizing: border-box;
+    outline: 0;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background: var(--primary-color);
+    font-family: 'Open sans', sans-serif;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    border-radius: 8px;
+    border: 1px solid;
+}
+
+td{
+    width: 200px;
+    height: 20px;
+    margin-left: 20px;
+    background: gray;
+    color: white;
+    border-radius: 5px;
+}
+
+#title_imc, #title_result{
+    background: rgb(95, 93, 93);
+}
+
+.container{
+  max-width: 640px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px ;
+}
+
+form input, form label, form button{
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input{
+    font-size: 24px;
+    height: 50px;
+    padding: 0 20px;
+}
+
+form input:focus{
+    outline:1px solid var(--primary-color) ;
+}
+
+form button{
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+form button:hover{
+    background: var(--primary-color-ligth);
+}
+
+#toast {
+    display: none;
+    position: fixed;
+    top: 6px;
+    right: 6px;  /* Alterado para posicionar à direita */
+    background-color: #9b0d0d;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(135, 10, 10, 0.5);
+}
+
+#toast:hover{
+    background-color: #d04e4e;
+}
+
+#tabela{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
