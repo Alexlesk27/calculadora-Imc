@@ -12,17 +12,9 @@ function calculaImc(peso, altura) {
     return imc.toFixed(2);
 }
 
-function criaP(){
-    const p = document.createElement('p')
-    return p
-}
-
 function setResultado(msg, isValid) {
     const result = document.querySelector('.result');
     result.innerHTML = ' ';
-    
-    const p = criaP();
-
 
     if (!isValid) {
         mostrarToast(msg, isValid);
@@ -33,9 +25,8 @@ function setResultado(msg, isValid) {
         result.style.backgroundColor = "#009000";
         result.style.color = "#FFF"
     }
-
-   
 }
+
 function mostrarToast(texto, isValid) {
     if (isValid) {
         var toast = document.createElement('div');
