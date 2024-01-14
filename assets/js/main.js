@@ -1,10 +1,69 @@
-const form = document.querySelector(".form")
-const button = document.querySelector(".button")
+const form = document.querySelector(".form");
+const button = document.querySelector(".button");
 
 oncreated()
 
 function oncreated() {
     calcula();
+}
+
+function calculaImc(peso, altura) {
+    const imc = peso / (altura * altura);
+    return imc.toFixed(2);
+}
+
+function criaP(){
+    const p = document.createElement('p')
+    return p
+}
+
+function setResultado(msg, isValid) {
+    const result = document.querySelector('.result');
+    result.innerHTML = ' ';
+    
+    const p = criaP();
+
+
+    if (!isValid) {
+        mostrarToast(msg, isValid);
+    }
+
+    if (isValid) {
+        result.innerHTML = msg;
+        result.style.backgroundColor = "#009000";
+        result.style.color = "#FFF"
+    }
+
+   
+}
+function mostrarToast(texto, isValid) {
+    if (isValid) {
+        var toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.innerText = texto;
+        document.body.appendChild(toast);
+        toast.style.display = 'block';
+        toast.style.backgroundColor = "#009000";
+        setTimeout(function () {
+            toast.style.display = 'none';
+            document.body.removeChild(toast);
+        }, 2500);
+        return;
+    }
+
+    if (!isValid) {
+        var toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.innerText = texto;
+        document.body.appendChild(toast);
+        toast.style.display = 'block';
+        setTimeout(function () {
+            toast.style.display = 'none';
+            document.body.removeChild(toast);
+        }, 2500);
+        return;
+    }
+
 }
 
 
@@ -13,97 +72,43 @@ function calcula() {
         evento.preventDefault();
 
         const inputPeso = evento.target.querySelector(".peso");
-        const inputAltura=evento.target.querySelector(".altura"); 
+        const inputAltura = evento.target.querySelector(".altura");
 
         const peso = Number(inputPeso.value);
         const altura = Number(inputAltura.value);
-        const getImc = calculaImc(peso, altura).toFixed(1);
+        const getImc = calculaImc(peso, altura);
 
 
-        if(!peso && !altura){
-            setResultado("Peso e altura invalido",false)
-            return
+        if (!peso && !altura) {
+            setResultado("Peso e altura invalido", false);
+            return;
         }
 
-        if(!peso){
-            setResultado("Peso invalido",false)
-            return
+        if (!peso) {
+            setResultado("Peso invalido", false);
+            return;
         }
 
-        if(!altura){
-            setResultado("Altura invalida",false)
-            return
+        if (!altura) {
+            setResultado("Altura invalida", false);
+            return;
         }
 
-        console.log(peso/(altura*altura))
+        console.log(peso / (altura * altura));
+       const nivelImc = getNivelImc(getImc)
 
-    
-        if (getImc < 18.5) {
-            setResultado( "a baixo do peso",true);
-        } else if (getImc >= 18.5 && getImc <= 24.9) {
-            setResultado("Peso normal", true)
-        } else if (getImc >= 25 && getImc <= 29.9) {
-            setResultado("Sobrepeso",true)
-        } else if (getImc >= 30 && getImc <= 34.9) {
-            setResultado(" Obesidade grau 1",true)
-        } else if (getImc >= 35 && getImc <= 39.9) {
-            setResultado(" Obesidade grau 2",true)
-        } else if (getImc == 40) {
-            setResultado(" Obesidade grau 3",true)
-        } else {
-            setResultado(" Nem um resultado encontrado",true)
-    
-        }
-    })
-
+        const msg =  `Seu IMC é ${getImc}, (${nivelImc}). `;
+        setResultado(msg, true);
+})
 }
 
-function calculaImc(peso, altura){
- return peso/(altura*altura)
+function getNivelImc(imc){
+   const nivel = ["a baixo do peso", "Peso normal", "Sobrepeso", " Obesidade grau 1", " Obesidade grau 2", " Obesidade grau 3", " Nem um resultado encontrado"]
+
+   if(imc >= 39.9) return nivel[5]
+   if(imc >= 34.9) return nivel[4]
+   if(imc >= 29.9) return nivel[3]
+   if(imc >= 24.9) return nivel[2]
+   if(imc >= 18.5) return nivel[1]
+   if(imc < 18.5) return nivel[0]
 }
-
-
-function setResultado(msg, isValid){
-    const result = document.querySelector('.result')
-    result.innerHTML= msg
-
-    if(!isValid){
-        result.style.backgroundColor = "#9b0d0d";
-        result.style.color = "#FFF"
-    }
-
-    if(isValid){
-        result.style.backgroundColor = "#009000";  
-    }
-     mostrarToast(msg, isValid)
-}
-function mostrarToast(texto, isValid) {
-    if(isValid){
-        var toast = document.createElement('div');
-        toast.id = 'toast';
-        toast.innerText = texto;
-        document.body.appendChild(toast);
-        toast.style.display = 'block';
-        toast.style.backgroundColor= "#009000";
-        setTimeout(function () {
-            toast.style.display = 'none';
-            document.body.removeChild(toast);
-        }, 2500);
-        return
-    }
-
-    if(!isValid){
-        var toast = document.createElement('div');
-        toast.id = 'toast';
-        toast.innerText = texto;
-        document.body.appendChild(toast);
-        toast.style.display = 'block';
-        setTimeout(function () {
-            toast.style.display = 'none';
-            document.body.removeChild(toast);
-        }, 2500);
-        return
-    }
-    
-}
-
